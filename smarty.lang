@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+  Source initiale : 
+  http://www.siteduzero.com/forum-83-594694-p1-utilisez-gedit-pour-vos-projets-utilisant-smarty.html
+
+  À placer dans : 
+  ~/.local/share/gtksourceview-2.0/language-specs/smarty.lang
+-->
+
+<language id="stl" _name="Smarty" version="2.0" _section="Scripts">
+    <metadata>
+        <property name="mimetypes">text/html</property>
+        <property name="globs">*.html;*.htm;*.tpl</property>
+    </metadata>
+    
+    <styles>
+        <style id="commentaire" _name="Commentaire" map-to="def:comment"/>
+        <style id="chaineG" _name="Chaîne de caractères" map-to="def:string"/>
+        <style id="chaineA" _name="Chaîne de caractères" map-to="def:string"/>
+        <style id="included-file" _name="Included File" map-to="def:string"/>
+        <style id="motCle" _name="Mot-clé" map-to="def:keyword"/>
+        <style id="filtre" _name="Filtre" map-to="def:keyword"/>
+        <style id="variable" _name="Variable" map-to="def:identifier"/>
+        <style id="operateur" _name="Opérateur" map-to="def:operator"/>
+        <style id="nombre" _name="Nombre" map-to="def:number"/>
+    </styles>
+    
+    <definitions>
+        
+        <context id="comment-multiline" style-ref="commentaire">
+            <start>{\*</start>
+            <end>\*}</end>
+            <include>
+                <context ref="def:in-comment"/>
+            </include>
+        </context>
+        
+        <context id="variable" style-ref="variable">
+            <match>(\$?[a-zA-Z_][a-zA-Z0-9_\.]*|#[a-zA-Z_][a-zA-Z0-9_\.]*#)</match>
+        </context>
+        
+        <context id="chaineG" end-at-line-end="true" style-ref="chaineG">
+            <start>"</start>
+            <end>"</end>
+        </context>
+        
+        <context id="chaineA" end-at-line-end="true" style-ref="chaineA">
+            <start>'</start>
+            <end>'</end>
+        </context>
+        
+        <context id="motsCles" style-ref="motCle">
+            <keyword>assign</keyword>
+            <keyword>config_load</keyword>
+            <keyword>include</keyword>
+            <keyword>insert</keyword>
+            <keyword>html_select_date</keyword>
+            <keyword>mailto</keyword>
+            <keyword>html_options</keyword>
+            <keyword>counter</keyword>
+            <keyword>cycle</keyword>
+            <keyword>eval</keyword>
+            <keyword>fetch</keyword>
+            <keyword>html_checkboxes</keyword>
+            <keyword>html_image</keyword>
+            <keyword>html_options</keyword>
+            <keyword>html_radios</keyword>
+            <keyword>html_select_time</keyword>
+            <keyword>html_table</keyword>
+            <keyword>math</keyword>
+            <keyword>textformat</keyword>
+            <keyword>$smarty</keyword>
+            <keyword>append</keyword>
+            <keyword>block</keyword>
+            <keyword>call</keyword>
+            <keyword>capture</keyword>
+            <keyword>debug</keyword>
+            <keyword>extends</keyword>
+            <keyword>for</keyword>
+            <keyword>foreach</keyword>
+            <keyword>foreachelse</keyword>
+            <keyword>function</keyword>
+            <keyword>if</keyword>
+            <keyword>elseif</keyword>
+            <keyword>else</keyword>
+            <keyword>include_php</keyword>
+            <keyword>insert</keyword>
+            <keyword>ldelim</keyword>
+            <keyword>rdelim</keyword>
+            <keyword>literal</keyword>
+            <keyword>nocache</keyword>
+            <keyword>php</keyword>
+            <keyword>section</keyword>
+            <keyword>sectionelse</keyword>
+            <keyword>strip</keyword>
+            <keyword>while</keyword>
+        </context>
+        
+        <context id="filtres" style-ref="filtre">
+            <prefix>^|</prefix>
+            <keyword>capitalize</keyword>
+            <keyword>cat</keyword>
+            <keyword>count_characters</keyword>
+            <keyword>count_paragraphs</keyword>
+            <keyword>count_sentences</keyword>
+            <keyword>count_words</keyword>
+            <keyword>date_format</keyword>
+            <keyword>default</keyword>
+            <keyword>escape</keyword>
+            <keyword>indent</keyword>
+            <keyword>lower</keyword>
+            <keyword>nl2br</keyword>
+            <keyword>regex_replace</keyword>
+            <keyword>replace</keyword>
+            <keyword>spacify</keyword>
+            <keyword>string_format</keyword>
+            <keyword>strip</keyword>
+            <keyword>strip_tags</keyword>
+            <keyword>truncate</keyword>
+            <keyword>upper</keyword>
+            <keyword>wordwrap</keyword>
+        </context>
+        
+        <context id="operateur" style-ref="operateur">
+            <match>(\=\=|\!\=|&lt;\=|&gt;\=|&gt;|&lt;|\=|\+|\=&gt;|\*|-|%|/)</match>
+        </context>
+        
+        <context id="nombre" style-ref="nombre">
+            <match>[0-9]*</match>
+        </context>
+        
+        <context id="block" end-at-line-end="true">
+            <start>{</start>
+            <end>}</end>
+            <include>
+                <context sub-pattern="0" where="start" style-ref="motCle"/>
+                <context sub-pattern="0" where="end" style-ref="motCle"/>
+                <context ref="chaineG"/>
+                <context ref="chaineA"/>
+                <context ref="motsCles"/>
+                <context ref="filtres"/>
+                <context ref="operateur"/>
+                <context ref="nombre"/>
+                <context ref="variable"/>
+            </include>
+        </context>
+        
+        <context id="smarty">
+            <include>
+                <context ref="comment-multiline"/>
+                <context ref="block"/>
+            </include>
+        </context>
+        
+        <replace id="html:embedded-lang-hook" ref="smarty"/>
+        
+        <context id="stl" class="no-spell-check">
+            <include>
+                <context ref="smarty"/>
+                <context ref="html:html"/>
+            </include>
+        </context>
+    </definitions>
+</language>
