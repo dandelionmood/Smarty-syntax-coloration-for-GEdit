@@ -1,13 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!-- 
-  Source initiale : 
-  http://www.siteduzero.com/forum-83-594694-p1-utilisez-gedit-pour-vos-projets-utilisant-smarty.html
-
-  À placer dans : 
-  ~/.local/share/gtksourceview-2.0/language-specs/smarty.lang
--->
-
 <language id="stl" _name="Smarty" version="2.0" _section="Scripts">
     <metadata>
         <property name="mimetypes">text/html</property>

@@ -1,12 +1,13 @@
 #!/bin/bash
 
-# Script d'installation du fichier smarty.lang
+# Installation script, run it as a normal user 
 # ############################################
 
-# Répertoire où l'on va installer le fichier.
+# This is the directory where we need to put the syntax file.
 rep=~/.local/share/gtksourceview-2.0/language-specs
-# Création au cas où il n'existe pas encore.
+
+# We create it if it doesn't exist yet.
 mkdir -p $rep
 
-# Création d'un lien symbolique vers le fichier Smarty.
-ln -s `pwd`/smarty.lang "$rep/smarty.lang"
+# We copy the file to its final destination. 
+cp ./smarty.lang "$rep/smarty.lang"
