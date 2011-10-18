@@ -7,7 +7,7 @@
 # HANDLING OF THE LANG FILE
 
 # This is the directory where we need to put the syntax file.
-rep=$HOME/.local/share/gtksourceview-2.0/language-specs
+rep=$HOME/.local/share/gtksourceview-3.0/language-specs
 
 # We create it if it doesn't exist yet.
 mkdir -p $rep
